@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | PLUGHUB</title>
+    <meta name="description" content="Privacy Policy di PLUGHUB - Informazioni sul trattamento dei dati personali.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0B0B0D',
+                            charcoal: '#141419',
+                            cyan: '#2EE9FF',
+                            blue: '#41A3CF',
+                            white: '#F4F6FA',
+                            gray: '#A7ACB8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        sora: ['Sora', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #0B0B0D; color: #F4F6FA; }
+        .text-gradient {
+            background: linear-gradient(135deg, #2EE9FF 0%, #41A3CF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-filled {
+            background: linear-gradient(135deg, #2EE9FF 0%, #41A3CF 100%);
+            color: #0B0B0D;
+            transition: all 0.3s ease;
+        }
+        .btn-filled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(46, 233, 255, 0.4);
+        }
+        .lang-btn {
+            background: rgba(46, 233, 255, 0.15);
+            border: 1px solid rgba(46, 233, 255, 0.35);
+            color: #2EE9FF;
+            transition: all 0.25s ease;
+        }
+        .lang-btn:hover {
+            background: rgba(46, 233, 255, 0.25);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 140px;
+            background: #141419;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 6px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .lang-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            background: #141419;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+        .lang-option:hover {
+            background: rgba(46, 233, 255, 0.15);
+        }
+        .lang-option.active {
+            background: rgba(46, 233, 255, 0.25);
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body class="font-sans antialiased bg-brand-black text-brand-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-brand-black/95 backdrop-blur-xl z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex-shrink-0 flex items-center gap-3">
+                    <img src="images/logo.png" alt="PLUGHUB Logo" class="h-10 w-auto">
+                    <span class="font-sora font-bold text-xl tracking-tight">
+                        <span class="text-white">PLUG</span><span class="text-brand-cyan">HUB</span>
+                    </span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector relative">
+                        <button id="lang-toggle" class="lang-btn flex items-center gap-2 px-3 py-2 rounded-full font-semibold text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <span id="current-lang">IT</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div id="lang-dropdown" class="lang-dropdown hidden">
+                            <button class="lang-option" data-lang="it" onclick="setLanguage('it')">
+                                <span>🇮🇹</span>
+                                <span>Italiano</span>
+                            </button>
+                            <button class="lang-option" data-lang="en" onclick="setLanguage('en')">
+                                <span>🇬🇧</span>
+                                <span>English</span>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="/" class="btn-filled px-5 py-2.5 rounded-full font-semibold text-sm" data-i18n="back">
+                        Torna al Sito
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-20"></div>
+
+    <!-- Content -->
+    <section class="py-16 lg:py-24 bg-brand-black">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl lg:text-5xl font-sora font-bold text-white mb-8" data-i18n="title">Informativa sul Trattamento dei Dati Personali (Art. 13 GDPR)</h1>
+            <p class="text-brand-gray mb-8" data-i18n="updated">Ultimo aggiornamento: 12 Febbraio 2026</p>
+
+            <div class="space-y-8 text-brand-gray">
+                <div data-i18n-section="section1">
+                    <h2 class="text-xl font-bold text-white mb-4">1. Titolare del Trattamento</h2>
+                    <p class="leading-relaxed">
+                        Il Titolare del trattamento è <strong class="text-white">Wee S.R.L.S.</strong>, con sede legale in Via delle industrie 1/A, 35010, Limena (PD), email: info@plughub.it.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section2">
+                    <h2 class="text-xl font-bold text-white mb-4">2. Tipologia di dati raccolti</h2>
+
+                    <h3 class="text-lg font-semibold text-white mt-4 mb-2">Dati di navigazione</h3>
+                    <p class="leading-relaxed">
+                        Il sito, ospitato su Netlify, raccoglie log tecnici (IP, browser).
+                    </p>
+
+                    <h3 class="text-lg font-semibold text-white mt-4 mb-2">Dati di geolocalizzazione e IP (Google Maps)</h3>
+                    <p class="leading-relaxed">
+                        Il sito utilizza le API di Google Maps per mostrare la posizione delle stazioni PLUGHUB. L'uso della mappa comporta la trasmissione dell'indirizzo IP dell'utente e, se autorizzato nel browser, dei dati di posizione ai server di Google.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section3">
+                    <h2 class="text-xl font-bold text-white mb-4">3. Servizi di Terze Parti: Google Maps</h2>
+                    <p class="leading-relaxed">
+                        Questo sito integra servizi di Google Maps (Google Ireland Limited). I dati vengono trattati negli USA sulla base del "Data Privacy Framework" o clausole contrattuali standard. Maggiori info: <a href="https://policies.google.com/privacy" target="_blank" class="text-brand-cyan hover:underline">Privacy Policy di Google</a>.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section4">
+                    <h2 class="text-xl font-bold text-white mb-4">4. Base Giuridica</h2>
+                    <p class="leading-relaxed">
+                        Il trattamento per le finalità tecniche di navigazione si basa sul legittimo interesse (Art. 6.1.f). La visualizzazione della mappa interattiva e il relativo tracciamento avvengono previo consenso dell'utente (tramite cookie banner).
+                    </p>
+                </div>
+
+                <div data-i18n-section="section5">
+                    <h2 class="text-xl font-bold text-white mb-4">5. Diritti dell'interessato</h2>
+                    <p class="leading-relaxed">
+                        Hai il diritto di accedere ai tuoi dati, chiederne la cancellazione o opporti al trattamento scrivendo a <strong class="text-white">info@plughub.it</strong>.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section6">
+                    <h2 class="text-xl font-bold text-white mb-4">6. Cookie</h2>
+                    <p class="leading-relaxed">
+                        Per informazioni sui cookie utilizzati dal sito, consultare la nostra
+                        <a href="cookie-policy.html" class="text-brand-cyan hover:underline">Cookie Policy</a>.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section7">
+                    <h2 class="text-xl font-bold text-white mb-4">7. Modifiche alla Privacy Policy</h2>
+                    <p class="leading-relaxed">
+                        La presente Privacy Policy può essere modificata in qualsiasi momento.
+                        Le modifiche saranno pubblicate su questa pagina con l'indicazione della data di aggiornamento.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section8">
+                    <h2 class="text-xl font-bold text-white mb-4">8. Contatti</h2>
+                    <p class="leading-relaxed">
+                        Per qualsiasi domanda relativa alla privacy, contattare:
+                        <strong class="text-white">info@plughub.it</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white pt-12 pb-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-brand-gray/60 text-sm text-center md:text-left">
+                    <p class="font-semibold text-brand-gray mb-1">PLUGHUB è un brand di Wee S.R.L.S.</p>
+                    <p>Wee S.R.L.S. | Sede Legale: Via delle industrie 1/A, 35010, Limena (PD) | P.IVA 05774330285 | PEC: wee@pec.it</p>
+                    <p class="mt-1">Tutti i diritti riservati © 2026</p>
+                </div>
+                <div class="flex gap-6 text-sm text-brand-gray/60">
+                    <a href="privacy-policy.html" class="hover:text-brand-cyan transition-colors">Privacy Policy</a>
+                    <a href="cookie-policy.html" class="hover:text-brand-cyan transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations for Privacy Policy (IT/EN only)
+        const translations = {
+            it: {
+                back: "Torna al Sito",
+                title: "Informativa sul Trattamento dei Dati Personali (Art. 13 GDPR)",
+                updated: "Ultimo aggiornamento: 12 Febbraio 2026",
+                section1: {
+                    title: "1. Titolare del Trattamento",
+                    content: "Il Titolare del trattamento è <strong class='text-white'>Wee S.R.L.S.</strong>, con sede legale in Via delle industrie 1/A, Limena (PD), email: info@plughub.it."
+                },
+                section2: {
+                    title: "2. Tipologia di dati raccolti",
+                    navTitle: "Dati di navigazione",
+                    navContent: "Il sito, ospitato su Netlify, raccoglie log tecnici (IP, browser).",
+                    geoTitle: "Dati di geolocalizzazione e IP (Google Maps)",
+                    geoContent: "Il sito utilizza le API di Google Maps per mostrare la posizione delle stazioni PLUGHUB. L'uso della mappa comporta la trasmissione dell'indirizzo IP dell'utente e, se autorizzato nel browser, dei dati di posizione ai server di Google."
+                },
+                section3: {
+                    title: "3. Servizi di Terze Parti: Google Maps",
+                    content: "Questo sito integra servizi di Google Maps (Google Ireland Limited). I dati vengono trattati negli USA sulla base del \"Data Privacy Framework\" o clausole contrattuali standard. Maggiori info: <a href='https://policies.google.com/privacy' target='_blank' class='text-brand-cyan hover:underline'>Privacy Policy di Google</a>."
+                },
+                section4: {
+                    title: "4. Base Giuridica",
+                    content: "Il trattamento per le finalità tecniche di navigazione si basa sul legittimo interesse (Art. 6.1.f). La visualizzazione della mappa interattiva e il relativo tracciamento avvengono previo consenso dell'utente (tramite cookie banner)."
+                },
+                section5: {
+                    title: "5. Diritti dell'interessato",
+                    content: "Hai il diritto di accedere ai tuoi dati, chiederne la cancellazione o opporti al trattamento scrivendo a <strong class='text-white'>info@plughub.it</strong>."
+                },
+                section6: {
+                    title: "6. Cookie",
+                    content: "Per informazioni sui cookie utilizzati dal sito, consultare la nostra <a href='cookie-policy.html' class='text-brand-cyan hover:underline'>Cookie Policy</a>."
+                },
+                section7: {
+                    title: "7. Modifiche alla Privacy Policy",
+                    content: "La presente Privacy Policy può essere modificata in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con l'indicazione della data di aggiornamento."
+                },
+                section8: {
+                    title: "8. Contatti",
+                    content: "Per qualsiasi domanda relativa alla privacy, contattare:"
+                }
+            },
+            en: {
+                back: "Back to Site",
+                title: "Privacy Policy (Art. 13 GDPR)",
+                updated: "Last updated: February 12, 2026",
+                section1: {
+                    title: "1. Data Controller",
+                    content: "The Data Controller is <strong class='text-white'>Wee S.R.L.S.</strong>, with registered office at Via delle industrie 1/A, Limena (PD), email: info@plughub.it."
+                },
+                section2: {
+                    title: "2. Types of data collected",
+                    navTitle: "Browsing data",
+                    navContent: "The site, hosted on Netlify, collects technical logs (IP, browser).",
+                    geoTitle: "Geolocation and IP data (Google Maps)",
+                    geoContent: "The site uses Google Maps APIs to show the location of PLUGHUB stations. Using the map involves transmitting the user's IP address and, if authorized in the browser, location data to Google's servers."
+                },
+                section3: {
+                    title: "3. Third-Party Services: Google Maps",
+                    content: "This site integrates Google Maps services (Google Ireland Limited). Data is processed in the USA based on the \"Data Privacy Framework\" or standard contractual clauses. More info: <a href='https://policies.google.com/privacy' target='_blank' class='text-brand-cyan hover:underline'>Google Privacy Policy</a>."
+                },
+                section4: {
+                    title: "4. Legal Basis",
+                    content: "Processing for technical browsing purposes is based on legitimate interest (Art. 6.1.f). Displaying the interactive map and related tracking occur with the user's prior consent (via cookie banner)."
+                },
+                section5: {
+                    title: "5. Data Subject Rights",
+                    content: "You have the right to access your data, request its deletion, or object to processing by writing to <strong class='text-white'>info@plughub.it</strong>."
+                },
+                section6: {
+                    title: "6. Cookies",
+                    content: "For information about cookies used by the site, please consult our <a href='cookie-policy.html' class='text-brand-cyan hover:underline'>Cookie Policy</a>."
+                },
+                section7: {
+                    title: "7. Changes to Privacy Policy",
+                    content: "This Privacy Policy may be modified at any time. Changes will be published on this page with the update date indicated."
+                },
+                section8: {
+                    title: "8. Contact",
+                    content: "For any questions regarding privacy, please contact:"
+                }
+            }
+        };
+
+        let currentLang = localStorage.getItem('plugHubLanguage') || 'it';
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            localStorage.setItem('plugHubLanguage', lang);
+            document.documentElement.lang = lang;
+            updatePageContent();
+            updateLangSelector();
+            toggleDropdown();
+        }
+
+        function updatePageContent() {
+            const t = translations[currentLang];
+
+            // Update simple text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+
+            // Update sections
+            document.querySelectorAll('[data-i18n-section="section1"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section1.title;
+                el.querySelector('p').innerHTML = t.section1.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section2"]').forEach(el => {
+                const headings = el.querySelectorAll('h2, h3');
+                const paragraphs = el.querySelectorAll('p');
+                headings[0].textContent = t.section2.title;
+                headings[1].textContent = t.section2.navTitle;
+                headings[2].textContent = t.section2.geoTitle;
+                paragraphs[0].textContent = t.section2.navContent;
+                paragraphs[1].textContent = t.section2.geoContent;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section3"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section3.title;
+                el.querySelector('p').innerHTML = t.section3.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section4"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section4.title;
+                el.querySelector('p').textContent = t.section4.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section5"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section5.title;
+                el.querySelector('p').innerHTML = t.section5.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section6"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section6.title;
+                el.querySelector('p').innerHTML = t.section6.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section7"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section7.title;
+                el.querySelector('p').textContent = t.section7.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section8"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section8.title;
+                el.querySelector('p').innerHTML = t.section8.content + ' <strong class="text-white">info@plughub.it</strong>';
+            });
+
+            // Update page title
+            document.title = 'Privacy Policy | PLUGHUB';
+        }
+
+        function updateLangSelector() {
+            document.getElementById('current-lang').textContent = currentLang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.lang === currentLang);
+            });
+        }
+
+        function toggleDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        }
+
+        // Initialize
+        document.getElementById('lang-toggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+
+        document.addEventListener('click', function() {
+            document.getElementById('lang-dropdown').classList.add('hidden');
+        });
+
+        // Load saved language
+        updatePageContent();
+        updateLangSelector();
+    </script>
+
+</body>
+</html>

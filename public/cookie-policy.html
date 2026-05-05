@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | PLUGHUB</title>
+    <meta name="description" content="Cookie Policy di PLUGHUB - Informazioni sull'uso dei cookie.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            white: '#FFFFFF',
+                            black: '#111111',
+                            blue: '#41B3E7',
+                            lightblue: '#6BC9F0',
+                            gray: '#1A1A1A',
+                            card: '#1E1E1E',
+                            text: '#F5F5F7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #111111; color: #FFFFFF; }
+        .btn-blue {
+            background: linear-gradient(135deg, #41B3E7 0%, #6BC9F0 100%);
+            transition: all 0.3s ease;
+            color: #111111;
+        }
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -5px rgba(65, 179, 231, 0.5);
+        }
+        /* Language Selector Styles */
+        .lang-btn {
+            background: rgba(65, 179, 231, 0.15);
+            border: 1px solid rgba(65, 179, 231, 0.35);
+            color: #41B3E7;
+            transition: all 0.25s ease;
+        }
+        .lang-btn:hover {
+            background: rgba(65, 179, 231, 0.25);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 140px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 6px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .lang-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            background: #1a1a1a;
+            border-left: 1px solid #333;
+            border-top: 1px solid #333;
+            transform: rotate(45deg);
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+        .lang-option:hover {
+            background: rgba(65, 179, 231, 0.15);
+        }
+        .lang-option.active {
+            background: rgba(65, 179, 231, 0.25);
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body class="font-sans antialiased bg-brand-black text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-brand-black/95 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="./" class="flex-shrink-0 flex items-center">
+                    <div class="w-12 h-12 mr-3 flex items-center justify-center">
+                        <img src="./images/logo.png" alt="PLUGHUB Logo" class="w-full h-full object-contain">
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight">
+                        <span class="text-white">PLUG</span><span class="text-brand-blue">HUB</span>
+                    </span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector relative">
+                        <button id="lang-toggle" class="lang-btn flex items-center gap-2 px-3 py-2 rounded-full font-semibold text-sm">
+                            <i class="fa-solid fa-globe"></i>
+                            <span id="current-lang">IT</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="lang-dropdown" class="lang-dropdown hidden">
+                            <button class="lang-option" data-lang="it" onclick="setLanguage('it')">
+                                <span>🇮🇹</span>
+                                <span>Italiano</span>
+                            </button>
+                            <button class="lang-option" data-lang="en" onclick="setLanguage('en')">
+                                <span>🇬🇧</span>
+                                <span>English</span>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="./" class="btn-blue px-5 py-2.5 rounded-full font-semibold text-sm" data-i18n="back">
+                        Torna al Sito
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-20"></div>
+
+    <!-- Content -->
+    <section class="py-16 lg:py-24 bg-brand-black">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl lg:text-5xl font-bold text-white mb-8" data-i18n="title">Informativa sui Cookie</h1>
+            <p class="text-gray-400 mb-8" data-i18n="updated">Ultimo aggiornamento: 26 Marzo 2026</p>
+
+            <div class="space-y-8 text-gray-300">
+
+                <!-- Introduzione -->
+                <div data-i18n-section="intro">
+                    <p class="leading-relaxed">
+                        La presente Cookie Policy è resa da <strong class="text-white">Wee S.R.L.S.</strong>, con sede legale in Via delle Industrie 1/A, 35010 Limena (PD), P.IVA 05774330285, e-mail: <strong class="text-white">info@plughub.it</strong>, PEC: <strong class="text-white">wee@pec.it</strong>, in qualità di titolare del trattamento, in relazione al sito <strong class="text-white">www.plughub.it</strong>.
+                    </p>
+                </div>
+
+                <!-- Sezione 1 -->
+                <div data-i18n-section="section1">
+                    <h2 class="text-xl font-bold text-white mb-4">1. Cosa sono cookie e strumenti analoghi</h2>
+                    <p class="leading-relaxed">
+                        I cookie sono piccoli file di testo che i siti visitati dall'utente possono archiviare sul dispositivo dell'utente. Funzioni analoghe possono essere svolte anche da altri strumenti di tracciamento.
+                    </p>
+                </div>
+
+                <!-- Sezione 2 -->
+                <div data-i18n-section="section2">
+                    <h2 class="text-xl font-bold text-white mb-4">2. Tipologie di strumenti utilizzati da questo sito</h2>
+                    <p class="leading-relaxed mb-4">
+                        Il sito utilizza esclusivamente:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                        <li><strong class="text-white">a)</strong> strumenti tecnici strettamente necessari al funzionamento del sito e, ove adottati, alla memorizzazione delle preferenze privacy/cookie espresse dall'utente;</li>
+                        <li><strong class="text-white">b)</strong> il servizio di terza parte Google Maps, caricato solo previo consenso dell'utente.</li>
+                    </ul>
+                    <p class="leading-relaxed">
+                        Il sito, nella configurazione qui descritta, non utilizza cookie analytics propri né strumenti di profilazione propri.
+                    </p>
+                </div>
+
+                <!-- Sezione 3 -->
+                <div data-i18n-section="section3">
+                    <h2 class="text-xl font-bold text-white mb-4">3. Cookie e strumenti tecnici</h2>
+                    <p class="leading-relaxed">
+                        Gli strumenti tecnici sono utilizzati per consentire la corretta erogazione del sito, la sicurezza della navigazione, l'eventuale memorizzazione della scelta effettuata dall'utente tramite il banner cookie e l'esecuzione di funzioni richieste dall'utente. Tali strumenti non richiedono consenso.
+                    </p>
+                </div>
+
+                <!-- Sezione 4 -->
+                <div data-i18n-section="section4">
+                    <h2 class="text-xl font-bold text-white mb-4">4. Google Maps</h2>
+                    <p class="leading-relaxed mb-4">
+                        La mappa interattiva delle stazioni è fornita tramite Google Maps. Il relativo contenuto non viene caricato automaticamente al primo accesso, ma solo a seguito di specifico consenso dell'utente.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Prima del consenso, il sito mantiene disponibile una modalità alternativa non interattiva o non tracciante, quale la lista delle stazioni.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        A seguito del consenso, Google Maps può trattare dati relativi alla navigazione e al dispositivo dell'utente, inclusi, a titolo esemplificativo:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                        <li>indirizzo IP</li>
+                        <li>informazioni sul browser e sul dispositivo</li>
+                        <li>dati tecnici di richiesta</li>
+                        <li>eventuali dati di interazione con la mappa</li>
+                        <li>dati di posizione (se autorizzati dall'utente nelle impostazioni del proprio browser o dispositivo)</li>
+                    </ul>
+                    <p class="leading-relaxed">
+                        Google può inoltre utilizzare cookie e tecnologie analoghe secondo le proprie policy.
+                    </p>
+                </div>
+
+                <!-- Sezione 5 -->
+                <div data-i18n-section="section5">
+                    <h2 class="text-xl font-bold text-white mb-4">5. Base giuridica</h2>
+                    <p class="leading-relaxed">
+                        Gli strumenti tecnici sono utilizzati sulla base della necessità tecnica di fornire il sito e il servizio richiesto dall'utente. Google Maps viene attivato solo sulla base del consenso libero, specifico, informato e inequivocabile dell'utente.
+                    </p>
+                </div>
+
+                <!-- Sezione 6 -->
+                <div data-i18n-section="section6">
+                    <h2 class="text-xl font-bold text-white mb-4">6. Modalità di raccolta e gestione del consenso</h2>
+                    <p class="leading-relaxed mb-4">
+                        Al primo accesso, nessun contenuto Google Maps viene caricato finché l'utente non abbia prestato il relativo consenso.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Il rifiuto del consenso non pregiudica la navigazione del sito e non impedisce la consultazione dei contenuti essenziali.
+                    </p>
+                    <p class="leading-relaxed mb-6">
+                        L'utente può in ogni momento modificare o revocare le proprie scelte tramite il link <strong class="text-white">"Rivedi preferenze cookie"</strong> presente nel footer del sito o in altra area sempre accessibile.
+                    </p>
+
+                    <!-- Bottone Modifica Preferenze Cookie -->
+                    <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
+                        <p class="text-gray-400 text-sm mb-4" data-i18n="modifyConsent.text">Vuoi modificare le tue preferenze sui cookie?</p>
+                        <a href="./?openCookieBanner=1" class="btn-blue inline-block px-8 py-3 rounded-full font-semibold text-sm" data-i18n="modifyConsent.button">
+                            Modifica preferenze cookie
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sezione 7 -->
+                <div data-i18n-section="section7">
+                    <h2 class="text-xl font-bold text-white mb-4">7. Destinatari e trasferimenti extra SEE</h2>
+                    <p class="leading-relaxed">
+                        Per il servizio Google Maps, i dati possono essere trattati da Google Ireland Limited e, nei limiti previsti dall'organizzazione del servizio, da Google LLC o altre società del gruppo Google. Eventuali trasferimenti di dati fuori dallo Spazio Economico Europeo avvengono secondo i meccanismi dichiarati dal fornitore e applicabili al caso concreto.
+                    </p>
+                </div>
+
+                <!-- Sezione 8 -->
+                <div data-i18n-section="section8">
+                    <h2 class="text-xl font-bold text-white mb-4">8. Hosting e infrastruttura</h2>
+                    <p class="leading-relaxed">
+                        Il sito è pubblicato su infrastruttura di hosting e serverless. L'eventuale trattamento di log tecnici o dati infrastrutturali da parte del fornitore di hosting attiene all'erogazione e alla sicurezza del servizio e non costituisce, di per sé, uso di cookie non tecnici sul terminale dell'utente. Tali trattamenti sono descritti nella Privacy Policy.
+                    </p>
+                </div>
+
+                <!-- Sezione 9 -->
+                <div data-i18n-section="section9">
+                    <h2 class="text-xl font-bold text-white mb-4">9. Come disabilitare i cookie dal browser</h2>
+                    <p class="leading-relaxed mb-4">
+                        L'utente può inoltre gestire o cancellare i cookie tramite le impostazioni del proprio browser. Tale operazione può tuttavia incidere sul corretto funzionamento di alcuni servizi.
+                    </p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 ml-4">
+                        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" class="text-brand-blue hover:underline">Guida Chrome</a></li>
+                        <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" class="text-brand-blue hover:underline">Guida Safari</a></li>
+                        <li><a href="https://support.mozilla.org/it/kb/Gestione%20dei%20cookie" target="_blank" class="text-brand-blue hover:underline">Guida Firefox</a></li>
+                        <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" class="text-brand-blue hover:underline">Guida Edge</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sezione 10 -->
+                <div data-i18n-section="section10">
+                    <h2 class="text-xl font-bold text-white mb-4">10. Aggiornamenti</h2>
+                    <p class="leading-relaxed">
+                        La presente Cookie Policy può essere aggiornata in qualsiasi momento, anche in conseguenza di modifiche normative, tecniche o organizzative. La versione aggiornata è pubblicata su questa pagina con indicazione della data di ultimo aggiornamento.
+                    </p>
+                </div>
+
+                <!-- Sezione 11 -->
+                <div data-i18n-section="section11">
+                    <h2 class="text-xl font-bold text-white mb-4">11. Contatti</h2>
+                    <p class="leading-relaxed">
+                        Per informazioni in materia di privacy e cookie: <strong class="text-white">info@plughub.it</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-12 pb-8 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-gray-600 text-sm text-center md:text-left">
+                    <p class="font-semibold text-gray-400 mb-1">PLUGHUB è un brand di Wee S.R.L.S.</p>
+                    <p>Wee S.R.L.S. | Sede Legale: Via delle industrie 1/A, 35010, Limena (PD) | P.IVA 05774330285 | PEC: wee@pec.it</p>
+                    <p class="mt-1">Tutti i diritti riservati © 2026</p>
+                </div>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="./privacy-policy.html" class="hover:text-brand-blue transition-colors">Privacy Policy</a>
+                    <a href="./cookie-policy.html" class="hover:text-brand-blue transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations for Cookie Policy (IT/EN only)
+        const translations = {
+            it: {
+                back: "Torna al Sito",
+                title: "Informativa sui Cookie",
+                updated: "Ultimo aggiornamento: 26 Marzo 2026",
+                intro: "La presente Cookie Policy è resa da <strong class=\"text-white\">Wee S.R.L.S.</strong>, con sede legale in Via delle Industrie 1/A, 35010 Limena (PD), P.IVA 05774330285, e-mail: <strong class=\"text-white\">info@plughub.it</strong>, PEC: <strong class=\"text-white\">wee@pec.it</strong>, in qualità di titolare del trattamento, in relazione al sito <strong class=\"text-white\">www.plughub.it</strong>.",
+                section1: {
+                    title: "1. Cosa sono cookie e strumenti analoghi",
+                    content: "I cookie sono piccoli file di testo che i siti visitati dall'utente possono archiviare sul dispositivo dell'utente. Funzioni analoghe possono essere svolte anche da altri strumenti di tracciamento."
+                },
+                section2: {
+                    title: "2. Tipologie di strumenti utilizzati da questo sito",
+                    intro: "Il sito utilizza esclusivamente:",
+                    item1: "strumenti tecnici strettamente necessari al funzionamento del sito e, ove adottati, alla memorizzazione delle preferenze privacy/cookie espresse dall'utente;",
+                    item2: "il servizio di terza parte Google Maps, caricato solo previo consenso dell'utente.",
+                    outro: "Il sito, nella configurazione qui descritta, non utilizza cookie analytics propri né strumenti di profilazione propri."
+                },
+                section3: {
+                    title: "3. Cookie e strumenti tecnici",
+                    content: "Gli strumenti tecnici sono utilizzati per consentire la corretta erogazione del sito, la sicurezza della navigazione, l'eventuale memorizzazione della scelta effettuata dall'utente tramite il banner cookie e l'esecuzione di funzioni richieste dall'utente. Tali strumenti non richiedono consenso."
+                },
+                section4: {
+                    title: "4. Google Maps",
+                    p1: "La mappa interattiva delle stazioni è fornita tramite Google Maps. Il relativo contenuto non viene caricato automaticamente al primo accesso, ma solo a seguito di specifico consenso dell'utente.",
+                    p2: "Prima del consenso, il sito mantiene disponibile una modalità alternativa non interattiva o non tracciante, quale la lista delle stazioni.",
+                    p3: "A seguito del consenso, Google Maps può trattare dati relativi alla navigazione e al dispositivo dell'utente, inclusi, a titolo esemplificativo:",
+                    li1: "indirizzo IP",
+                    li2: "informazioni sul browser e sul dispositivo",
+                    li3: "dati tecnici di richiesta",
+                    li4: "eventuali dati di interazione con la mappa",
+                    li5: "dati di posizione (se autorizzati dall'utente nelle impostazioni del proprio browser o dispositivo)",
+                    p4: "Google può inoltre utilizzare cookie e tecnologie analoghe secondo le proprie policy."
+                },
+                section5: {
+                    title: "5. Base giuridica",
+                    content: "Gli strumenti tecnici sono utilizzati sulla base della necessità tecnica di fornire il sito e il servizio richiesto dall'utente. Google Maps viene attivato solo sulla base del consenso libero, specifico, informato e inequivocabile dell'utente."
+                },
+                section6: {
+                    title: "6. Modalità di raccolta e gestione del consenso",
+                    p1: "Al primo accesso, nessun contenuto Google Maps viene caricato finché l'utente non abbia prestato il relativo consenso.",
+                    p2: "Il rifiuto del consenso non pregiudica la navigazione del sito e non impedisce la consultazione dei contenuti essenziali.",
+                    p3: "L'utente può in ogni momento modificare o revocare le proprie scelte tramite il link <strong class=\"text-white\">\"Rivedi preferenze cookie\"</strong> presente nel footer del sito o in altra area sempre accessibile."
+                },
+                modifyConsent: {
+                    text: "Vuoi modificare le tue preferenze sui cookie?",
+                    button: "Modifica preferenze cookie"
+                },
+                section7: {
+                    title: "7. Destinatari e trasferimenti extra SEE",
+                    content: "Per il servizio Google Maps, i dati possono essere trattati da Google Ireland Limited e, nei limiti previsti dall'organizzazione del servizio, da Google LLC o altre società del gruppo Google. Eventuali trasferimenti di dati fuori dallo Spazio Economico Europeo avvengono secondo i meccanismi dichiarati dal fornitore e applicabili al caso concreto."
+                },
+                section8: {
+                    title: "8. Hosting e infrastruttura",
+                    content: "Il sito è pubblicato su infrastruttura di hosting e serverless. L'eventuale trattamento di log tecnici o dati infrastrutturali da parte del fornitore di hosting attiene all'erogazione e alla sicurezza del servizio e non costituisce, di per sé, uso di cookie non tecnici sul terminale dell'utente. Tali trattamenti sono descritti nella Privacy Policy."
+                },
+                section9: {
+                    title: "9. Come disabilitare i cookie dal browser",
+                    content: "L'utente può inoltre gestire o cancellare i cookie tramite le impostazioni del proprio browser. Tale operazione può tuttavia incidere sul corretto funzionamento di alcuni servizi.",
+                    chrome: "Guida Chrome",
+                    safari: "Guida Safari",
+                    firefox: "Guida Firefox",
+                    edge: "Guida Edge"
+                },
+                section10: {
+                    title: "10. Aggiornamenti",
+                    content: "La presente Cookie Policy può essere aggiornata in qualsiasi momento, anche in conseguenza di modifiche normative, tecniche o organizzative. La versione aggiornata è pubblicata su questa pagina con indicazione della data di ultimo aggiornamento."
+                },
+                section11: {
+                    title: "11. Contatti",
+                    content: "Per informazioni in materia di privacy e cookie:"
+                }
+            },
+            en: {
+                back: "Back to Site",
+                title: "Cookie Policy",
+                updated: "Last updated: March 26, 2026",
+                intro: "This Cookie Policy is provided by <strong class=\"text-white\">Wee S.R.L.S.</strong>, with registered office at Via delle Industrie 1/A, 35010 Limena (PD), VAT 05774330285, email: <strong class=\"text-white\">info@plughub.it</strong>, PEC: <strong class=\"text-white\">wee@pec.it</strong>, as data controller, in relation to the website <strong class=\"text-white\">www.plughub.it</strong>.",
+                section1: {
+                    title: "1. What are cookies and similar tools",
+                    content: "Cookies are small text files that websites visited by the user can store on the user's device. Similar functions can also be performed by other tracking tools."
+                },
+                section2: {
+                    title: "2. Types of tools used by this site",
+                    intro: "This site exclusively uses:",
+                    item1: "technical tools strictly necessary for the operation of the site and, where adopted, for storing privacy/cookie preferences expressed by the user;",
+                    item2: "the third-party service Google Maps, loaded only with the user's prior consent.",
+                    outro: "The site, in the configuration described here, does not use proprietary analytics cookies or proprietary profiling tools."
+                },
+                section3: {
+                    title: "3. Technical cookies and tools",
+                    content: "Technical tools are used to enable proper site delivery, browsing security, possible storage of choices made by the user through the cookie banner, and execution of functions requested by the user. These tools do not require consent."
+                },
+                section4: {
+                    title: "4. Google Maps",
+                    p1: "The interactive station map is provided via Google Maps. This content is not automatically loaded on first access, but only following specific user consent.",
+                    p2: "Before consent, the site maintains an available alternative non-interactive or non-tracking mode, such as the station list.",
+                    p3: "Following consent, Google Maps may process data relating to navigation and the user's device, including, by way of example:",
+                    li1: "IP address",
+                    li2: "browser and device information",
+                    li3: "technical request data",
+                    li4: "any map interaction data",
+                    li5: "location data (if authorized by the user in their browser or device settings)",
+                    p4: "Google may also use cookies and similar technologies according to its own policies."
+                },
+                section5: {
+                    title: "5. Legal basis",
+                    content: "Technical tools are used on the basis of the technical necessity to provide the site and the service requested by the user. Google Maps is activated only on the basis of the user's free, specific, informed and unambiguous consent."
+                },
+                section6: {
+                    title: "6. Consent collection and management methods",
+                    p1: "On first access, no Google Maps content is loaded until the user has given the relevant consent.",
+                    p2: "Refusing consent does not prejudice site navigation and does not prevent consultation of essential content.",
+                    p3: "The user can modify or revoke their choices at any time via the <strong class=\"text-white\">\"Review cookie preferences\"</strong> link in the site footer or in another always accessible area."
+                },
+                modifyConsent: {
+                    text: "Do you want to change your cookie preferences?",
+                    button: "Modify cookie preferences"
+                },
+                section7: {
+                    title: "7. Recipients and transfers outside the EEA",
+                    content: "For the Google Maps service, data may be processed by Google Ireland Limited and, within the limits provided by the service organization, by Google LLC or other companies in the Google group. Any data transfers outside the European Economic Area take place according to the mechanisms declared by the provider and applicable to the specific case."
+                },
+                section8: {
+                    title: "8. Hosting and infrastructure",
+                    content: "The site is published on GitHub Pages infrastructure. Any processing of technical logs or infrastructure data by the hosting provider relates to service delivery and security and does not constitute, in itself, use of non-technical cookies on the user's terminal. These processing activities are described in the Privacy Policy."
+                },
+                section9: {
+                    title: "9. How to disable cookies from your browser",
+                    content: "The user can also manage or delete cookies through their browser settings. However, this operation may affect the proper functioning of some services.",
+                    chrome: "Chrome Guide",
+                    safari: "Safari Guide",
+                    firefox: "Firefox Guide",
+                    edge: "Edge Guide"
+                },
+                section10: {
+                    title: "10. Updates",
+                    content: "This Cookie Policy may be updated at any time, including as a result of regulatory, technical or organizational changes. The updated version is published on this page with the indication of the last update date."
+                },
+                section11: {
+                    title: "11. Contact",
+                    content: "For information regarding privacy and cookies:"
+                }
+            }
+        };
+
+        let currentLang = localStorage.getItem('plugHubLanguage') || 'it';
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            localStorage.setItem('plugHubLanguage', lang);
+            document.documentElement.lang = lang;
+            updatePageContent();
+            updateLangSelector();
+            toggleDropdown();
+        }
+
+        function updatePageContent() {
+            const t = translations[currentLang];
+
+            // Update simple text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+
+            // Update intro
+            document.querySelectorAll('[data-i18n-section="intro"]').forEach(el => {
+                el.querySelector('p').innerHTML = t.intro;
+            });
+
+            // Update sections
+            document.querySelectorAll('[data-i18n-section="section1"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section1.title;
+                el.querySelector('p').textContent = t.section1.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section2"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                const lists = el.querySelectorAll('ul li');
+                headings[0].textContent = t.section2.title;
+                paragraphs[0].textContent = t.section2.intro;
+                lists[0].innerHTML = '<strong class="text-white">a)</strong> ' + t.section2.item1;
+                lists[1].innerHTML = '<strong class="text-white">b)</strong> ' + t.section2.item2;
+                paragraphs[1].textContent = t.section2.outro;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section3"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section3.title;
+                el.querySelector('p').textContent = t.section3.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section4"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                const lists = el.querySelectorAll('ul li');
+                headings[0].textContent = t.section4.title;
+                paragraphs[0].textContent = t.section4.p1;
+                paragraphs[1].textContent = t.section4.p2;
+                paragraphs[2].textContent = t.section4.p3;
+                lists[0].textContent = t.section4.li1;
+                lists[1].textContent = t.section4.li2;
+                lists[2].textContent = t.section4.li3;
+                lists[3].textContent = t.section4.li4;
+                lists[4].textContent = t.section4.li5;
+                paragraphs[3].textContent = t.section4.p4;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section5"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section5.title;
+                el.querySelector('p').textContent = t.section5.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section6"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                headings[0].textContent = t.section6.title;
+                paragraphs[0].textContent = t.section6.p1;
+                paragraphs[1].textContent = t.section6.p2;
+                paragraphs[2].innerHTML = t.section6.p3;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section7"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section7.title;
+                el.querySelector('p').textContent = t.section7.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section8"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section8.title;
+                el.querySelector('p').textContent = t.section8.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section9"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                const links = el.querySelectorAll('ul li a');
+                headings[0].textContent = t.section9.title;
+                paragraphs[0].textContent = t.section9.content;
+                links[0].textContent = t.section9.chrome;
+                links[1].textContent = t.section9.safari;
+                links[2].textContent = t.section9.firefox;
+                links[3].textContent = t.section9.edge;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section10"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section10.title;
+                el.querySelector('p').textContent = t.section10.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section11"]').forEach(el => {
+                const headings = el.querySelectorAll('h2');
+                const paragraphs = el.querySelectorAll('p');
+                headings[0].textContent = t.section11.title;
+                paragraphs[0].innerHTML = t.section11.content + ' <strong class="text-white">info@plughub.it</strong>';
+            });
+
+            // Update page title
+            document.title = t.title + ' | PLUGHUB';
+        }
+
+        function updateLangSelector() {
+            document.getElementById('current-lang').textContent = currentLang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.lang === currentLang);
+            });
+        }
+
+        function toggleDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        }
+
+        // Initialize
+        document.getElementById('lang-toggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+
+        document.addEventListener('click', function() {
+            document.getElementById('lang-dropdown').classList.add('hidden');
+        });
+
+        // Load saved language
+        updatePageContent();
+        updateLangSelector();
+    </script>
+
+</body>
+</html>

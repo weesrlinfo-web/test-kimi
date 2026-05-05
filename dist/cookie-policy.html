@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | PLUGHUB</title>
+    <meta name="description" content="Cookie Policy di PLUGHUB - Informazioni sull'uso dei cookie.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0B0B0D',
+                            charcoal: '#141419',
+                            cyan: '#2EE9FF',
+                            blue: '#41A3CF',
+                            white: '#F4F6FA',
+                            gray: '#A7ACB8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        sora: ['Sora', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #0B0B0D; color: #F4F6FA; }
+        .text-gradient {
+            background: linear-gradient(135deg, #2EE9FF 0%, #41A3CF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-filled {
+            background: linear-gradient(135deg, #2EE9FF 0%, #41A3CF 100%);
+            color: #0B0B0D;
+            transition: all 0.3s ease;
+        }
+        .btn-filled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(46, 233, 255, 0.4);
+        }
+        .lang-btn {
+            background: rgba(46, 233, 255, 0.15);
+            border: 1px solid rgba(46, 233, 255, 0.35);
+            color: #2EE9FF;
+            transition: all 0.25s ease;
+        }
+        .lang-btn:hover {
+            background: rgba(46, 233, 255, 0.25);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 140px;
+            background: #141419;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 6px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .lang-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            background: #141419;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+        .lang-option:hover {
+            background: rgba(46, 233, 255, 0.15);
+        }
+        .lang-option.active {
+            background: rgba(46, 233, 255, 0.25);
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body class="font-sans antialiased bg-brand-black text-brand-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-brand-black/95 backdrop-blur-xl z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex-shrink-0 flex items-center gap-3">
+                    <img src="images/logo.png" alt="PLUGHUB Logo" class="h-10 w-auto">
+                    <span class="font-sora font-bold text-xl tracking-tight">
+                        <span class="text-white">PLUG</span><span class="text-brand-cyan">HUB</span>
+                    </span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector relative">
+                        <button id="lang-toggle" class="lang-btn flex items-center gap-2 px-3 py-2 rounded-full font-semibold text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            <span id="current-lang">IT</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div id="lang-dropdown" class="lang-dropdown hidden">
+                            <button class="lang-option" data-lang="it" onclick="setLanguage('it')">
+                                <span>🇮🇹</span>
+                                <span>Italiano</span>
+                            </button>
+                            <button class="lang-option" data-lang="en" onclick="setLanguage('en')">
+                                <span>🇬🇧</span>
+                                <span>English</span>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="/" class="btn-filled px-5 py-2.5 rounded-full font-semibold text-sm" data-i18n="back">
+                        Torna al Sito
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-20"></div>
+
+    <!-- Content -->
+    <section class="py-16 lg:py-24 bg-brand-black">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl lg:text-5xl font-sora font-bold text-white mb-8" data-i18n="title">Informativa sui Cookie</h1>
+            <p class="text-brand-gray mb-8" data-i18n="updated">Ultimo aggiornamento: 12 Febbraio 2026</p>
+
+            <div class="space-y-8 text-brand-gray">
+                <div data-i18n-section="section1">
+                    <h2 class="text-xl font-bold text-white mb-4">1. Cosa sono i cookie?</h2>
+                    <p class="leading-relaxed">
+                        Sono piccoli file installati nel tuo browser. Alcuni sono necessari (tecnici), altri servono a funzioni aggiuntive (terze parti).
+                    </p>
+                </div>
+
+                <div data-i18n-section="section2">
+                    <h2 class="text-xl font-bold text-white mb-4">2. Cookie utilizzati da questo sito</h2>
+
+                    <h3 class="text-lg font-semibold text-white mt-6 mb-3">Cookie Tecnici (Netlify)</h3>
+                    <p class="leading-relaxed mb-4">
+                        Necessari per la sicurezza e la distribuzione del traffico. Non richiedono consenso.
+                    </p>
+
+                    <h3 class="text-lg font-semibold text-white mt-6 mb-3">Cookie di Terze Parti (Google Maps)</h3>
+                    <p class="leading-relaxed">
+                        Le API di Google Maps possono installare cookie (come NID, SID, __Secure-ENID) per memorizzare preferenze di visualizzazione o per scopi statistici e di tracciamento pubblicitario di Google.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section3">
+                    <h2 class="text-xl font-bold text-white mb-4">3. Consenso e Blocco</h2>
+                    <p class="leading-relaxed">
+                        All'accesso al sito, puoi scegliere se accettare o meno i cookie di terze parti tramite il banner. Puoi anche disabilitare i cookie dalle impostazioni del tuo browser:
+                    </p>
+                    <ul class="list-disc list-inside mt-4 space-y-2 ml-4">
+                        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" class="text-brand-cyan hover:underline">Guida Chrome</a></li>
+                        <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" class="text-brand-cyan hover:underline">Guida Safari</a></li>
+                    </ul>
+                </div>
+
+                <div data-i18n-section="section4">
+                    <h2 class="text-xl font-bold text-white mb-4">4. Conseguenze del rifiuto</h2>
+                    <p class="leading-relaxed">
+                        Se rifiuti i cookie di terze parti, la mappa delle stazioni PLUGHUB potrebbe non essere visualizzata correttamente o apparire come un'area statica senza interattività.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section5">
+                    <h2 class="text-xl font-bold text-white mb-4">5. Modifiche alla Cookie Policy</h2>
+                    <p class="leading-relaxed">
+                        La presente Cookie Policy può essere modificata in qualsiasi momento.
+                        Le modifiche saranno pubblicate su questa pagina con l'indicazione della data di aggiornamento.
+                    </p>
+                </div>
+
+                <div data-i18n-section="section6">
+                    <h2 class="text-xl font-bold text-white mb-4">6. Contatti</h2>
+                    <p class="leading-relaxed">
+                        Per qualsiasi domanda relativa all'uso dei cookie, contattare:
+                        <strong class="text-white">info@plughub.it</strong>
+                    </p>
+                </div>
+
+                <!-- Reset Cookie Preferences -->
+                <div class="pt-8 border-t border-white/10">
+                    <h2 class="text-xl font-bold text-white mb-4">Reimposta preferenze cookie</h2>
+                    <p class="leading-relaxed mb-4">
+                        Puoi reimpostare le tue preferenze sui cookie in qualsiasi momento. Cliccando il pulsante sotto, il banner dei cookie verrà mostrato nuovamente al prossimo caricamento della pagina.
+                    </p>
+                    <button onclick="resetCookieConsent()" class="btn-filled px-6 py-3 rounded-full font-semibold">
+                        Reimposta preferenze
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-white pt-12 pb-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-brand-gray/60 text-sm text-center md:text-left">
+                    <p class="font-semibold text-brand-gray mb-1">PLUGHUB è un brand di Wee S.R.L.S.</p>
+                    <p>Wee S.R.L.S. | Sede Legale: Via delle industrie 1/A, 35010, Limena (PD) | P.IVA 05774330285 | PEC: wee@pec.it</p>
+                    <p class="mt-1">Tutti i diritti riservati © 2026</p>
+                </div>
+                <div class="flex gap-6 text-sm text-brand-gray/60">
+                    <a href="privacy-policy.html" class="hover:text-brand-cyan transition-colors">Privacy Policy</a>
+                    <a href="cookie-policy.html" class="hover:text-brand-cyan transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translations for Cookie Policy (IT/EN only)
+        const translations = {
+            it: {
+                back: "Torna al Sito",
+                title: "Informativa sui Cookie",
+                updated: "Ultimo aggiornamento: 12 Febbraio 2026",
+                section1: {
+                    title: "1. Cosa sono i cookie?",
+                    content: "Sono piccoli file installati nel tuo browser. Alcuni sono necessari (tecnici), altri servono a funzioni aggiuntive (terze parti)."
+                },
+                section2: {
+                    title: "2. Cookie utilizzati da questo sito",
+                    techTitle: "Cookie Tecnici (Netlify)",
+                    techContent: "Necessari per la sicurezza e la distribuzione del traffico. Non richiedono consenso.",
+                    thirdTitle: "Cookie di Terze Parti (Google Maps)",
+                    thirdContent: "Le API di Google Maps possono installare cookie (come NID, SID, __Secure-ENID) per memorizzare preferenze di visualizzazione o per scopi statistici e di tracciamento pubblicitario di Google."
+                },
+                section3: {
+                    title: "3. Consenso e Blocco",
+                    content: "All'accesso al sito, puoi scegliere se accettare o meno i cookie di terze parti tramite il banner. Puoi anche disabilitare i cookie dalle impostazioni del tuo browser:",
+                    chrome: "Guida Chrome",
+                    safari: "Guida Safari"
+                },
+                section4: {
+                    title: "4. Conseguenze del rifiuto",
+                    content: "Se rifiuti i cookie di terze parti, la mappa delle stazioni PLUGHUB potrebbe non essere visualizzata correttamente o apparire come un'area statica senza interattività."
+                },
+                section5: {
+                    title: "5. Modifiche alla Cookie Policy",
+                    content: "La presente Cookie Policy può essere modificata in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con l'indicazione della data di aggiornamento."
+                },
+                section6: {
+                    title: "6. Contatti",
+                    content: "Per qualsiasi domanda relativa all'uso dei cookie, contattare:"
+                }
+            },
+            en: {
+                back: "Back to Site",
+                title: "Cookie Policy",
+                updated: "Last updated: February 12, 2026",
+                section1: {
+                    title: "1. What are cookies?",
+                    content: "They are small files installed in your browser. Some are necessary (technical), others serve additional functions (third-party)."
+                },
+                section2: {
+                    title: "2. Cookies used by this site",
+                    techTitle: "Technical Cookies (Netlify)",
+                    techContent: "Necessary for security and traffic distribution. No consent required.",
+                    thirdTitle: "Third-Party Cookies (Google Maps)",
+                    thirdContent: "Google Maps APIs may install cookies (such as NID, SID, __Secure-ENID) to store display preferences or for Google's statistical and advertising tracking purposes."
+                },
+                section3: {
+                    title: "3. Consent and Blocking",
+                    content: "When accessing the site, you can choose whether to accept third-party cookies via the banner. You can also disable cookies from your browser settings:",
+                    chrome: "Chrome Guide",
+                    safari: "Safari Guide"
+                },
+                section4: {
+                    title: "4. Consequences of refusal",
+                    content: "If you refuse third-party cookies, the PLUGHUB station map may not display correctly or may appear as a static area without interactivity."
+                },
+                section5: {
+                    title: "5. Changes to Cookie Policy",
+                    content: "This Cookie Policy may be modified at any time. Changes will be published on this page with the update date indicated."
+                },
+                section6: {
+                    title: "6. Contact",
+                    content: "For any questions regarding the use of cookies, please contact:"
+                }
+            }
+        };
+
+        let currentLang = localStorage.getItem('plugHubLanguage') || 'it';
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+            localStorage.setItem('plugHubLanguage', lang);
+            document.documentElement.lang = lang;
+            updatePageContent();
+            updateLangSelector();
+            toggleDropdown();
+        }
+
+        function updatePageContent() {
+            const t = translations[currentLang];
+
+            // Update simple text elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.textContent = t[key];
+            });
+
+            // Update sections
+            document.querySelectorAll('[data-i18n-section="section1"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section1.title;
+                el.querySelector('p').textContent = t.section1.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section2"]').forEach(el => {
+                const headings = el.querySelectorAll('h2, h3');
+                const paragraphs = el.querySelectorAll('p');
+                headings[0].textContent = t.section2.title;
+                headings[1].textContent = t.section2.techTitle;
+                headings[2].textContent = t.section2.thirdTitle;
+                paragraphs[0].textContent = t.section2.techContent;
+                paragraphs[1].textContent = t.section2.thirdContent;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section3"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section3.title;
+                el.querySelector('p').textContent = t.section3.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section4"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section4.title;
+                el.querySelector('p').textContent = t.section4.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section5"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section5.title;
+                el.querySelector('p').textContent = t.section5.content;
+            });
+
+            document.querySelectorAll('[data-i18n-section="section6"]').forEach(el => {
+                el.querySelector('h2').textContent = t.section6.title;
+                el.querySelector('p').firstChild.textContent = t.section6.content + ' ';
+            });
+
+            // Update page title
+            document.title = t.title + ' | PLUGHUB';
+        }
+
+        function updateLangSelector() {
+            document.getElementById('current-lang').textContent = currentLang.toUpperCase();
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.dataset.lang === currentLang);
+            });
+        }
+
+        function toggleDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        }
+
+        function resetCookieConsent() {
+            localStorage.removeItem('plugHubCookieConsent');
+            alert(currentLang === 'it' ? 'Preferenze reimpostate. Ricarica la pagina per vedere il banner.' : 'Preferences reset. Reload the page to see the banner.');
+        }
+
+        // Initialize
+        document.getElementById('lang-toggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+
+        document.addEventListener('click', function() {
+            document.getElementById('lang-dropdown').classList.add('hidden');
+        });
+
+        // Load saved language
+        updatePageContent();
+        updateLangSelector();
+    </script>
+
+</body>
+</html>
