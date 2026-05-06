@@ -158,7 +158,7 @@ const StationMapCanvas = ({
         markersRef.current.clear();
 
         const pin = new googleMaps.maps.marker.PinElement({
-          background: '#2EE9FF',
+          background: '#41A3CF',
           borderColor: '#0B0C10',
           glyphColor: '#0B0C10',
         });
@@ -230,13 +230,13 @@ const StationMapCanvas = ({
       <div ref={mapContainerRef} className="absolute inset-0" />
 
       {mapError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-brand-charcoal/95 p-6 text-center z-20">
+        <div className="absolute inset-0 flex items-center justify-center bg-[#0A0A12]/95 p-6 text-center z-20">
           <div>
-            <div className="w-16 h-16 bg-brand-cyan/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <MapPin className="w-8 h-8 text-brand-cyan" />
+            <div className="w-16 h-16 bg-[#41A3CF]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-8 h-8 text-[#41A3CF]" />
             </div>
-            <h3 className="text-xl font-semibold text-brand-white mb-2">Mappa non configurata</h3>
-            <p className="text-brand-gray max-w-md">
+            <h3 className="text-xl font-semibold text-[#F4F6FA] mb-2">Mappa non configurata</h3>
+            <p className="text-[#8A8F9D] max-w-md">
               {mapError} Controlla che la chiave Google Maps sia valida e che le restrizioni del dominio siano corrette.
             </p>
           </div>
@@ -247,14 +247,14 @@ const StationMapCanvas = ({
         <div className="absolute right-4 top-4 flex flex-col gap-2 z-10">
           <button
             onClick={zoomIn}
-            className="w-10 h-10 bg-brand-charcoal border border-white/10 rounded-xl flex items-center justify-center text-brand-white hover:text-brand-cyan hover:border-brand-cyan/50 transition-all"
+            className="w-10 h-10 bg-[#0A0A12] border border-white/10 rounded-xl flex items-center justify-center text-[#F4F6FA] hover:text-[#41A3CF] hover:border-[#41A3CF]/50 transition-all"
             aria-label="Zoom avanti"
           >
             <Plus className="w-5 h-5" />
           </button>
           <button
             onClick={zoomOut}
-            className="w-10 h-10 bg-brand-charcoal border border-white/10 rounded-xl flex items-center justify-center text-brand-white hover:text-brand-cyan hover:border-brand-cyan/50 transition-all"
+            className="w-10 h-10 bg-[#0A0A12] border border-white/10 rounded-xl flex items-center justify-center text-[#F4F6FA] hover:text-[#41A3CF] hover:border-[#41A3CF]/50 transition-all"
             aria-label="Zoom indietro"
           >
             <Minus className="w-5 h-5" />
@@ -263,7 +263,7 @@ const StationMapCanvas = ({
             onClick={() => {
               void recenter();
             }}
-            className="w-10 h-10 bg-brand-charcoal border border-white/10 rounded-xl flex items-center justify-center text-brand-white hover:text-brand-cyan hover:border-brand-cyan/50 transition-all"
+            className="w-10 h-10 bg-[#0A0A12] border border-white/10 rounded-xl flex items-center justify-center text-[#F4F6FA] hover:text-[#41A3CF] hover:border-[#41A3CF]/50 transition-all"
             aria-label="Centra tutte le stazioni"
           >
             <Crosshair className="w-5 h-5" />
@@ -275,22 +275,22 @@ const StationMapCanvas = ({
 };
 
 const MapOverlay = () => (
-  <div className="absolute inset-0 flex flex-col items-center justify-center bg-brand-charcoal/90 z-20 p-6 text-center">
-    <div className="w-16 h-16 bg-brand-cyan/10 rounded-2xl flex items-center justify-center mb-4">
-      <MapPin className="w-8 h-8 text-brand-cyan" />
+  <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0A0A12]/90 z-20 p-6 text-center">
+    <div className="w-16 h-16 bg-[#41A3CF]/10 rounded-2xl flex items-center justify-center mb-4">
+      <MapPin className="w-8 h-8 text-[#41A3CF]" />
     </div>
-    <h3 className="text-xl font-semibold text-brand-white mb-2">Mappa disattivata</h3>
-    <p className="text-brand-gray max-w-md mb-6">
+    <h3 className="text-xl font-semibold text-[#F4F6FA] mb-2">Mappa disattivata</h3>
+    <p className="text-[#8A8F9D] max-w-md mb-6">
       Per visualizzare la mappa interattiva, accetta i cookie di terze parti legati a Google Maps.
       La lista dei locali resta sempre disponibile.
     </p>
     <button
       onClick={acceptCookieConsent}
-      className="px-6 py-3 bg-brand-cyan text-brand-black font-semibold rounded-full hover:shadow-[0_0_20px_rgba(46,233,255,0.4)] transition-all duration-300"
+      className="px-6 py-3 bg-[#41A3CF] text-[#06060A] font-semibold rounded-full hover:shadow-[0_0_20px_rgba(65,163,207,0.35)] transition-all duration-300"
     >
       Accetta e visualizza la mappa
     </button>
-    <a href={cookiePolicyUrl} className="text-brand-cyan hover:underline text-sm mt-4">
+    <a href={cookiePolicyUrl} className="text-[#41A3CF] hover:underline text-sm mt-4">
       Leggi la Cookie Policy
     </a>
   </div>
@@ -384,15 +384,15 @@ const MapSection = () => {
       <section
         ref={sectionRef}
         id="map-section"
-        className="relative bg-brand-black py-32 lg:py-40 overflow-hidden"
+        className="relative bg-[#06060A] py-32 lg:py-40 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-cyan/[0.02] via-transparent to-brand-cyan/[0.02]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#41A3CF]/[0.02] via-transparent to-[#41A3CF]/[0.02]" />
 
         <div className="absolute inset-0 pointer-events-none">
           {Array.from({ length: 15 }).map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-brand-cyan/40 rounded-full"
+              className="absolute w-1 h-1 bg-[#41A3CF]/40 rounded-full"
               style={{
                 left: `${10 + Math.random() * 80}%`,
                 top: `${10 + Math.random() * 80}%`,
@@ -405,26 +405,26 @@ const MapSection = () => {
         <div className="relative w-full px-6 lg:px-12">
           <div className="max-w-6xl mx-auto">
             <div ref={titleRef} className="text-center mb-12">
-              <span className="reveal-item inline-block text-caption mb-6 font-mono tracking-widest">
+              <span className="reveal-item inline-block label mb-6 font-mono tracking-widest">
                 DOVE TROVARCI
               </span>
-              <h2 className="reveal-item text-4xl sm:text-5xl lg:text-6xl font-sora font-bold text-brand-white mb-6">
+              <h2 className="reveal-item text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-[#F4F6FA] mb-6">
                 Stazioni <span className="text-gradient">PlugHub</span>
               </h2>
-              <p className="reveal-item text-lg text-brand-gray max-w-2xl mx-auto">
+              <p className="reveal-item text-lg text-[#8A8F9D] max-w-2xl mx-auto">
                 Lista a sinistra, mappa a destra. Clicca un locale per vedere i dettagli e aprire le indicazioni.
               </p>
             </div>
 
-            <div className="reveal-item relative bg-brand-charcoal/50 border border-white/10 rounded-3xl overflow-hidden">
+            <div className="reveal-item relative bg-[#0A0A12]/50 border border-white/10 rounded-3xl overflow-hidden">
               <div className="flex flex-col lg:flex-row h-[600px]">
-                <div className="w-full lg:w-[380px] bg-brand-charcoal border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col">
+                <div className="w-full lg:w-[380px] bg-[#0A0A12] border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col">
                   <div className="p-4 border-b border-white/10">
                     <div className="flex items-center justify-between">
-                      <div className="font-semibold text-brand-white">Locali</div>
-                      <div className="text-xs text-brand-gray">{stations.length} totali</div>
+                      <div className="font-semibold text-[#F4F6FA]">Locali</div>
+                      <div className="text-xs text-[#8A8F9D]">{stations.length} totali</div>
                     </div>
-                    <div className="mt-2 text-xs text-brand-gray/60">
+                    <div className="mt-2 text-xs text-[#8A8F9D]/60">
                       Seleziona una stazione per centrare la mappa e aprire i dettagli.
                     </div>
                   </div>
@@ -436,17 +436,17 @@ const MapSection = () => {
                         onClick={() => handleSelectStation(station)}
                         className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 ${
                           selectedStation?.id === station.id
-                            ? 'border-brand-cyan/50 bg-brand-cyan/10'
-                            : 'border-white/10 bg-white/5 hover:border-brand-cyan/30'
+                            ? 'border-[#41A3CF]/50 bg-[#41A3CF]/10'
+                            : 'border-white/10 bg-white/5 hover:border-[#41A3CF]/30'
                         }`}
                       >
-                        <div className="font-semibold text-brand-white mb-1">{station.nome}</div>
-                        <div className="text-xs text-brand-gray mb-2">{station.indirizzo}</div>
+                        <div className="font-semibold text-[#F4F6FA] mb-1">{station.nome}</div>
+                        <div className="text-xs text-[#8A8F9D] mb-2">{station.indirizzo}</div>
                         <div className="flex items-center justify-between gap-3">
-                          <span className="text-xs text-brand-cyan bg-brand-cyan/10 px-2 py-1 rounded-full">
+                          <span className="text-xs text-[#41A3CF] bg-[#41A3CF]/10 px-2 py-1 rounded-full">
                             {station.tariffa}
                           </span>
-                          <span className="text-xs text-brand-gray text-right">
+                          <span className="text-xs text-[#8A8F9D] text-right">
                             {station.powerbank_disponibili} powerbank disponibili
                           </span>
                         </div>
@@ -455,7 +455,7 @@ const MapSection = () => {
                   </div>
                 </div>
 
-                <div className="flex-1 relative bg-brand-black min-h-[360px]">
+                <div className="flex-1 relative bg-[#06060A] min-h-[360px]">
                   {mapEnabled ? (
                     <StationMapCanvas
                       mapEnabled={mapEnabled}
@@ -467,50 +467,50 @@ const MapSection = () => {
                   )}
 
                   {selectedStation && (
-                    <div className="absolute left-1/2 top-4 -translate-x-1/2 w-[360px] max-w-[calc(100%-24px)] bg-brand-charcoal border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-30">
+                    <div className="absolute left-1/2 top-4 -translate-x-1/2 w-[360px] max-w-[calc(100%-24px)] bg-[#0A0A12] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-30">
                       <div className="relative p-5">
                         <button
                           onClick={() => setSelectedStation(null)}
-                          className="absolute top-3 right-3 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-brand-gray hover:text-brand-white hover:bg-white/20 transition-all"
+                          className="absolute top-3 right-3 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-[#8A8F9D] hover:text-[#F4F6FA] hover:bg-white/20 transition-all"
                           aria-label="Chiudi dettagli stazione"
                         >
                           <X className="w-4 h-4" />
                         </button>
 
-                        <h3 className="text-lg font-semibold text-brand-white mb-3 pr-8">
+                        <h3 className="text-lg font-semibold text-[#F4F6FA] mb-3 pr-8">
                           {selectedStation.nome}
                         </h3>
 
                         <div className="space-y-2 text-sm">
                           <div className="flex items-start gap-2">
-                            <MapPin className="w-4 h-4 text-brand-gray mt-0.5 flex-shrink-0" />
-                            <span className="text-brand-gray">{selectedStation.indirizzo}</span>
+                            <MapPin className="w-4 h-4 text-[#8A8F9D] mt-0.5 flex-shrink-0" />
+                            <span className="text-[#8A8F9D]">{selectedStation.indirizzo}</span>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-brand-gray">Tariffa:</span>
-                            <span className="text-brand-cyan">{selectedStation.tariffa}</span>
+                            <span className="text-[#8A8F9D]">Tariffa:</span>
+                            <span className="text-[#41A3CF]">{selectedStation.tariffa}</span>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-brand-gray">Pagamento:</span>
-                            <span className="text-brand-white">{selectedStation.pagamento}</span>
+                            <span className="text-[#8A8F9D]">Pagamento:</span>
+                            <span className="text-[#F4F6FA]">{selectedStation.pagamento}</span>
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-brand-gray">Orari:</span>
-                            <span className="text-brand-white">{selectedStation.orari}</span>
+                            <span className="text-[#8A8F9D]">Orari:</span>
+                            <span className="text-[#F4F6FA]">{selectedStation.orari}</span>
                           </div>
 
-                          <div className="flex items-center gap-2 text-brand-cyan">
-                            <span className="w-1.5 h-1.5 bg-brand-cyan rounded-full" />
+                          <div className="flex items-center gap-2 text-[#41A3CF]">
+                            <span className="w-1.5 h-1.5 bg-[#41A3CF] rounded-full" />
                             <span>{selectedStation.powerbank_disponibili} powerbank disponibili</span>
                           </div>
                         </div>
 
                         <button
                           onClick={() => openDirections(selectedStation)}
-                          className="w-full mt-4 py-3 bg-brand-cyan text-brand-black font-semibold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(46,233,255,0.4)] transition-all"
+                          className="w-full mt-4 py-3 bg-[#41A3CF] text-[#06060A] font-semibold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(65,163,207,0.35)] transition-all"
                         >
                           <Navigation className="w-4 h-4" />
                           Indicazioni
@@ -527,7 +527,7 @@ const MapSection = () => {
 
       <button
         onClick={() => setShowMapModal(true)}
-        className="fixed bottom-24 right-6 z-40 w-14 h-14 bg-brand-cyan text-brand-black rounded-full shadow-lg shadow-brand-cyan/30 flex items-center justify-center hover:scale-110 hover:shadow-[0_0_30px_rgba(46,233,255,0.5)] transition-all duration-300"
+        className="fixed bottom-24 right-6 z-40 w-14 h-14 bg-[#41A3CF] text-[#06060A] rounded-full shadow-lg shadow-[#41A3CF]/30 flex items-center justify-center hover:scale-110 hover:shadow-[0_0_30px_rgba(46,233,255,0.5)] transition-all duration-300"
         aria-label="Apri mappa"
       >
         <MapPin className="w-6 h-6" />
@@ -539,19 +539,19 @@ const MapSection = () => {
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={() => setShowMapModal(false)}
           />
-          <div className="relative w-full max-w-6xl h-[80vh] bg-brand-charcoal border border-white/10 rounded-3xl overflow-hidden">
+          <div className="relative w-full max-w-6xl h-[80vh] bg-[#0A0A12] border border-white/10 rounded-3xl overflow-hidden">
             <div className="absolute top-4 right-4 z-30">
               <button
                 onClick={() => setShowMapModal(false)}
-                className="w-10 h-10 bg-brand-charcoal border border-white/10 rounded-xl flex items-center justify-center text-brand-white hover:text-brand-cyan hover:border-brand-cyan/50 transition-all"
+                className="w-10 h-10 bg-[#0A0A12] border border-white/10 rounded-xl flex items-center justify-center text-[#F4F6FA] hover:text-[#41A3CF] hover:border-[#41A3CF]/50 transition-all"
                 aria-label="Chiudi mappa"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="h-full flex flex-col lg:flex-row">
-              <div className="w-full lg:w-[320px] bg-brand-black border-b lg:border-b-0 lg:border-r border-white/10 p-4 overflow-y-auto">
-                <h3 className="font-semibold text-brand-white mb-4">Stazioni</h3>
+              <div className="w-full lg:w-[320px] bg-[#06060A] border-b lg:border-b-0 lg:border-r border-white/10 p-4 overflow-y-auto">
+                <h3 className="font-semibold text-[#F4F6FA] mb-4">Stazioni</h3>
                 <div className="space-y-3">
                   {stations.map((station) => (
                     <button
@@ -559,17 +559,17 @@ const MapSection = () => {
                       onClick={() => handleSelectStation(station)}
                       className={`w-full text-left p-3 rounded-xl border transition-all ${
                         selectedStation?.id === station.id
-                          ? 'border-brand-cyan/50 bg-brand-cyan/10'
-                          : 'border-white/10 bg-white/5 hover:border-brand-cyan/30'
+                          ? 'border-[#41A3CF]/50 bg-[#41A3CF]/10'
+                          : 'border-white/10 bg-white/5 hover:border-[#41A3CF]/30'
                       }`}
                     >
-                      <div className="font-medium text-brand-white text-sm">{station.nome}</div>
-                      <div className="text-xs text-brand-gray mt-1">{station.indirizzo}</div>
+                      <div className="font-medium text-[#F4F6FA] text-sm">{station.nome}</div>
+                      <div className="text-xs text-[#8A8F9D] mt-1">{station.indirizzo}</div>
                     </button>
                   ))}
                 </div>
               </div>
-              <div className="flex-1 relative bg-brand-black min-h-[360px]">
+              <div className="flex-1 relative bg-[#06060A] min-h-[360px]">
                 {mapEnabled ? (
                   <StationMapCanvas
                     mapEnabled={mapEnabled}
@@ -581,50 +581,50 @@ const MapSection = () => {
                 )}
               
                 {selectedStation && (
-                  <div className="absolute left-1/2 top-4 -translate-x-1/2 w-[360px] max-w-[calc(100%-24px)] bg-brand-charcoal border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-30">
+                  <div className="absolute left-1/2 top-4 -translate-x-1/2 w-[360px] max-w-[calc(100%-24px)] bg-[#0A0A12] border border-white/10 rounded-2xl overflow-hidden shadow-2xl z-30">
                     <div className="relative p-5">
                       <button
                         onClick={() => setSelectedStation(null)}
-                        className="absolute top-3 right-3 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-brand-gray hover:text-brand-white hover:bg-white/20 transition-all"
+                        className="absolute top-3 right-3 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-[#8A8F9D] hover:text-[#F4F6FA] hover:bg-white/20 transition-all"
                         aria-label="Chiudi dettagli stazione"
                       >
                         <X className="w-4 h-4" />
                       </button>
                 
-                      <h3 className="text-lg font-semibold text-brand-white mb-3 pr-8">
+                      <h3 className="text-lg font-semibold text-[#F4F6FA] mb-3 pr-8">
                         {selectedStation.nome}
                       </h3>
                 
                       <div className="space-y-2 text-sm">
                         <div className="flex items-start gap-2">
-                          <MapPin className="w-4 h-4 text-brand-gray mt-0.5 flex-shrink-0" />
-                          <span className="text-brand-gray">{selectedStation.indirizzo}</span>
+                          <MapPin className="w-4 h-4 text-[#8A8F9D] mt-0.5 flex-shrink-0" />
+                          <span className="text-[#8A8F9D]">{selectedStation.indirizzo}</span>
                         </div>
                 
                         <div className="flex items-center gap-2">
-                          <span className="text-brand-gray">Tariffa:</span>
-                          <span className="text-brand-cyan">{selectedStation.tariffa}</span>
+                          <span className="text-[#8A8F9D]">Tariffa:</span>
+                          <span className="text-[#41A3CF]">{selectedStation.tariffa}</span>
                         </div>
                 
                         <div className="flex items-center gap-2">
-                          <span className="text-brand-gray">Pagamento:</span>
-                          <span className="text-brand-white">{selectedStation.pagamento}</span>
+                          <span className="text-[#8A8F9D]">Pagamento:</span>
+                          <span className="text-[#F4F6FA]">{selectedStation.pagamento}</span>
                         </div>
                 
                         <div className="flex items-center gap-2">
-                          <span className="text-brand-gray">Orari:</span>
-                          <span className="text-brand-white">{selectedStation.orari}</span>
+                          <span className="text-[#8A8F9D]">Orari:</span>
+                          <span className="text-[#F4F6FA]">{selectedStation.orari}</span>
                         </div>
                 
-                        <div className="flex items-center gap-2 text-brand-cyan">
-                          <span className="w-1.5 h-1.5 bg-brand-cyan rounded-full" />
+                        <div className="flex items-center gap-2 text-[#41A3CF]">
+                          <span className="w-1.5 h-1.5 bg-[#41A3CF] rounded-full" />
                           <span>{selectedStation.powerbank_disponibili} powerbank disponibili</span>
                         </div>
                       </div>
                 
                       <button
                         onClick={() => openDirections(selectedStation)}
-                        className="w-full mt-4 py-3 bg-brand-cyan text-brand-black font-semibold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(46,233,255,0.4)] transition-all"
+                        className="w-full mt-4 py-3 bg-[#41A3CF] text-[#06060A] font-semibold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(65,163,207,0.35)] transition-all"
                       >
                         <Navigation className="w-4 h-4" />
                         Indicazioni

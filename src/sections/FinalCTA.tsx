@@ -6,12 +6,7 @@ import { ArrowRight, Check, Zap } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const benefits = [
-  'Installazione gratuita',
-  'Nessun canone mensile',
-  'Zero gestione',
-  'Assistenza gratuita',
-];
+const benefits = ['Installazione gratuita', 'Nessun canone mensile', 'Zero gestione', 'Assistenza gratuita'];
 
 const FinalCTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -19,152 +14,68 @@ const FinalCTA = () => {
   const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const content = contentRef.current;
-    const glow = glowRef.current;
-
+    const section = sectionRef.current, content = contentRef.current, glow = glowRef.current;
     if (!section || !content || !glow) return;
 
     const ctx = gsap.context(() => {
-      // Pulsing glow animation
-      gsap.to(glow, {
-        scale: 1.35,
-        opacity: 0.45,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
+      gsap.to(glow, { scale: 1.3, opacity: 0.5, duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
 
-      // Content reveal with smooth energy effect
-      gsap.fromTo(
-        content.querySelectorAll('.reveal-item'),
-        { y: 45, opacity: 0, filter: 'blur(12px)' },
-        {
-          y: 0,
-          opacity: 1,
-          filter: 'blur(0px)',
-          duration: 1,
-          stagger: 0.12,
-          ease: 'expo.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 72%',
-            toggleActions: 'play none none reverse',
-          },
+      gsap.fromTo(content.querySelectorAll('.reveal-item'),
+        { y: 40, opacity: 0, filter: 'blur(10px)' },
+        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1, stagger: 0.12, ease: 'expo.out',
+          scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none reverse' },
         }
       );
-
-      // Floating particles animation
-      const particles = section.querySelectorAll('.float-particle');
-      particles.forEach((particle, i) => {
-        gsap.to(particle, {
-          y: -30 + Math.random() * 60,
-          x: -20 + Math.random() * 40,
-          duration: 5 + Math.random() * 3,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-          delay: i * 0.3,
-        });
-      });
     }, section);
-
     return () => ctx.revert();
   }, []);
 
-  const scrollToContact = () => {
-    scrollToSection('contact');
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-brand-black py-32 lg:py-40 overflow-hidden"
-    >
-      {/* Central glow orb */}
-      <div 
-        ref={glowRef}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px]"
-        style={{
-          background: 'radial-gradient(circle, rgba(46, 233, 255, 0.2) 0%, rgba(65, 163, 207, 0.1) 30%, transparent 60%)',
-          filter: 'blur(80px)',
-        }}
-      />
+    <section ref={sectionRef} className="relative py-32 lg:py-40 overflow-hidden bg-[#06060A]">
+      {/* Central glow */}
+      <div ref={glowRef} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(65,163,207,0.15) 0%, rgba(65,163,207,0.05) 30%, transparent 60%)', filter: 'blur(70px)' }} />
 
-      {/* Floating particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 25 }).map((_, i) => (
-          <div
-            key={i}
-            className="float-particle absolute w-1.5 h-1.5 bg-brand-cyan/50 rounded-full"
-            style={{
-              left: `${5 + Math.random() * 90}%`,
-              top: `${5 + Math.random() * 90}%`,
-              boxShadow: '0 0 10px rgba(46, 233, 255, 0.8)',
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Grid overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(46, 233, 255, 0.8) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(46, 233, 255, 0.8) 1px, transparent 1px)`,
-          backgroundSize: '100px 100px',
-        }}
-      />
-
-      {/* Energy rings */}
+      {/* Rings */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="w-[400px] h-[400px] border border-brand-cyan/10 rounded-full animate-pulse" />
-        <div className="absolute inset-4 w-[368px] h-[368px] border border-brand-cyan/5 rounded-full" />
+        <div className="w-[350px] h-[350px] border border-[#41A3CF]/[0.07] rounded-full" />
+        <div className="absolute inset-3 w-[326px] h-[326px] border border-[#41A3CF]/[0.04] rounded-full" />
       </div>
+
+      {/* Dot grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.012]"
+        style={{ backgroundImage: 'radial-gradient(circle, #41A3CF 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
 
       <div className="relative w-full px-6 lg:px-12">
-        <div ref={contentRef} className="max-w-4xl mx-auto text-center">
-          {/* Headline */}
-          <h2 className="reveal-item text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-sora font-bold text-brand-white mb-6 leading-tight">
-            Porta ora PlugHub<br />
-            <span className="text-gradient">nel tuo locale</span>
+        <div ref={contentRef} className="max-w-3xl mx-auto text-center">
+          <h2 className="reveal-item text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#F4F6FA] mb-6 leading-tight">
+            Porta ora PlugHub<br /><span className="text-brand-gradient">nel tuo locale</span>
           </h2>
-
-          {/* Subheadline */}
-          <p className="reveal-item text-lg sm:text-xl text-brand-gray max-w-2xl mx-auto mb-12">
+          <p className="reveal-item text-base sm:text-lg text-[#8A8F9D] max-w-lg mx-auto mb-10">
             Offri un servizio utile ai tuoi clienti, senza costi e senza gestione.
           </p>
 
-          {/* Benefits */}
-          <div className="reveal-item flex flex-wrap justify-center gap-3 mb-12">
-            {benefits.map((benefit, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-4 py-2 hover:border-brand-cyan/30 hover:bg-white/10 card-premium group"
-              >
-                <Check className="w-4 h-4 text-brand-cyan group-hover:scale-110 transition-transform" />
-                <span className="text-sm text-brand-white">{benefit}</span>
+          {/* Benefit pills */}
+          <div className="reveal-item flex flex-wrap justify-center gap-2.5 mb-10">
+            {benefits.map((b, i) => (
+              <div key={i} className="glass glass-hover flex items-center gap-2 px-4 py-2 group">
+                <Check className="w-3.5 h-3.5 text-[#41A3CF] group-hover:scale-110 transition-transform" />
+                <span className="text-sm text-[#F4F6FA]">{b}</span>
               </div>
             ))}
           </div>
 
           {/* CTA */}
           <div className="reveal-item">
-            <button
-              onClick={scrollToContact}
-              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-brand-cyan text-brand-black font-semibold rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_60px_rgba(46,233,255,0.6)] hover:scale-105"
-            >
-              <Zap className="w-5 h-5" />
+            <button onClick={() => scrollToSection('contact')} className="btn-primary text-base px-10 py-5">
+              <Zap className="w-5 h-5 relative z-10" />
               <span className="relative z-10">Installa gratis nel tuo locale</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              {/* Shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <span className="shine" />
             </button>
           </div>
 
-          {/* Trust text */}
-          <p className="reveal-item mt-10 text-sm text-brand-gray/60 font-mono">
+          <p className="reveal-item mt-8 text-xs text-[#5A5F6D] font-mono">
             Risposta entro 24 ore • Nessun impegno • Installazione in 10 minuti
           </p>
         </div>

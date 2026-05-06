@@ -73,16 +73,16 @@ const CookieBanner = ({ onConsentChange }: CookieBannerProps) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[100] bg-brand-charcoal/95 backdrop-blur-xl border-t border-white/10 cookie-enter">
+    <div className="fixed bottom-0 left-0 right-0 z-[100] bg-[#0A0A12]/95 backdrop-blur-2xl border-t border-white/[0.06]">
       <div className="w-full px-6 lg:px-12 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-brand-cyan/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Cookie className="w-5 h-5 text-brand-cyan" />
+              <div className="w-10 h-10 bg-[#41A3CF]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Cookie className="w-5 h-5 text-[#41A3CF]" />
               </div>
-              <div className="text-sm text-brand-gray">
-                <p className="text-brand-white font-medium mb-1">Informativa breve:</p>
+              <div className="text-sm text-[#8A8F9D]">
+                <p className="text-[#F4F6FA] font-medium mb-1">Informativa breve:</p>
                 <p>
                   Questo sito usa strumenti tecnici necessari e Google Maps solo dopo il tuo consenso.
                   Se rifiuti, la lista delle stazioni resta disponibile ma la mappa interattiva non viene caricata.
@@ -93,25 +93,26 @@ const CookieBanner = ({ onConsentChange }: CookieBannerProps) => {
             <div className="flex flex-wrap items-center justify-center gap-3 flex-shrink-0">
               <button
                 onClick={acceptCookies}
-                className="px-6 py-2.5 bg-brand-cyan text-brand-black font-semibold rounded-full hover:shadow-[0_0_20px_rgba(46,233,255,0.4)] card-premium"
+                className="btn-primary text-sm py-2.5 px-6"
               >
-                Accetta
+                <span className="relative z-10">Accetta</span>
+                <span className="shine" />
               </button>
               <button
                 onClick={rejectCookies}
-                className="px-6 py-2.5 bg-white/5 border border-white/20 text-brand-white font-medium rounded-full hover:border-brand-cyan/50 hover:text-brand-cyan card-premium"
+                className="btn-ghost text-sm py-2.5 px-6"
               >
                 Rifiuta
               </button>
               <a
                 href={cookiePolicyUrl}
-                className="text-brand-cyan hover:underline text-sm font-medium"
+                className="text-[#41A3CF] hover:underline text-sm font-medium"
               >
                 Cookie Policy
               </a>
               <button
                 onClick={closeBanner}
-                className="text-brand-gray hover:text-brand-white transition-colors ml-2"
+                className="text-[#8A8F9D] hover:text-[#F4F6FA] transition-colors ml-2"
                 aria-label="Chiudi"
               >
                 <X className="w-5 h-5" />
