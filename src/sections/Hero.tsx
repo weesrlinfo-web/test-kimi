@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ── Floating Powerbank ── */
 const FloatingPB = ({
-  src, size, x, y, duration, delay,
-}: { src: string; size: number; x: string; y: string; duration: number; delay: number }) => {
+  src, size, x, y, duration, delay, className = ''
+}: { src: string; size: number; x: string; y: string; duration: number; delay: number; className?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
@@ -23,7 +23,7 @@ const FloatingPB = ({
   }, [duration, delay]);
 
   return (
-    <div ref={ref} className="absolute pointer-events-none" style={{ left: x, top: y, width: size, height: size }}>
+    <div ref={ref} className={`absolute pointer-events-none ${className}`} style={{ left: x, top: y, width: size, height: size }}>
       <img src={src} alt="" className="w-full h-full object-contain opacity-[0.18]" draggable={false}
         style={{ filter: 'brightness(0.7) contrast(1.1)' }} />
     </div>
@@ -34,7 +34,8 @@ const FloatingPB = ({
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
+  const logoTiltRef = useRef<HTMLDivElement>(null);
+  const logoFadeRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const mouseTarget = useRef({ x: 0, y: 0 });
   const mouseSmooth = useRef({ x: 0, y: 0 });
@@ -45,20 +46,24 @@ const Hero = () => {
   /* Loading */
   useEffect(() => { const t = setTimeout(() => setIsLoading(false), 600); return () => clearTimeout(t); }, []);
 
-  /* Smooth mouse RAF */
+  /* Smooth mouse RAF — separate tilt from fade */
   const onMove = useCallback((e: MouseEvent) => {
     mouseTarget.current = { x: (e.clientX / window.innerWidth - 0.5) * 2, y: (e.clientY / window.innerHeight - 0.5) * 2 };
   }, []);
+
   useEffect(() => {
     window.addEventListener('mousemove', onMove, { passive: true });
     const loop = () => {
       const s = mouseSmooth.current, t = mouseTarget.current;
       s.x += (t.x - s.x) * 0.05; s.y += (t.y - s.y) * 0.05;
+
+      /* Logo 3D tilt — applied to outer container only */
+      if (logoTiltRef.current) {
+        logoTiltRef.current.style.transform = `perspective(1000px) rotateY(${s.x * 3}deg) rotateX(${s.y * -3}deg)`;
+      }
+      /* Glow follows mouse */
       if (glowRef.current) {
         glowRef.current.style.transform = `translate(-50%,-50%) translate(${s.x * -16}px,${s.y * -16}px)`;
-      }
-      if (logoRef.current) {
-        logoRef.current.style.transform = `perspective(1000px) rotateY(${s.x * 3}deg) rotateX(${s.y * -3}deg)`;
       }
       rafRef.current = requestAnimationFrame(loop);
     };
@@ -69,16 +74,19 @@ const Hero = () => {
   /* Entrance + scroll fade */
   useEffect(() => {
     if (isLoading) return;
-    const section = sectionRef.current, content = contentRef.current, logo = logoRef.current, glow = glowRef.current;
-    if (!section || !content || !logo || !glow) return;
+    const section = sectionRef.current;
+    const content = contentRef.current;
+    const logoFade = logoFadeRef.current;
+    const glow = glowRef.current;
+    if (!section || !content || !logoFade || !glow) return;
 
     const ctx = gsap.context(() => {
-      gsap.set([logo, '.hero-badge', '.hero-headline', '.hero-sub', '.hero-ctas', '.hero-stats'], { opacity: 0, y: 30 });
+      gsap.set([logoFade, '.hero-badge', '.hero-headline', '.hero-sub', '.hero-ctas', '.hero-stats'], { opacity: 0, y: 30 });
       gsap.set(glow, { opacity: 0, scale: 0.7 });
 
       const tl = gsap.timeline({ delay: 0.2 });
       tl.to(glow, { opacity: 1, scale: 1, duration: 1.4, ease: 'power2.out' }, 0)
-        .to(logo, { opacity: 1, y: 0, duration: 1, ease: 'expo.out' }, 0.2)
+        .to(logoFade, { opacity: 1, y: 0, duration: 1, ease: 'expo.out' }, 0.2)
         .to('.hero-badge', { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 0.4)
         .to('.hero-headline', { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out' }, 0.5)
         .to('.hero-sub', { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out' }, 0.62)
@@ -88,12 +96,18 @@ const Hero = () => {
       /* Glow breathing */
       gsap.to(glow, { scale: 1.1, opacity: 0.55, duration: 5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 2 });
 
-      /* Scroll fade — NO PIN, just gentle fade */
-      gsap.to([logo, content, glow], {
-        y: -50, opacity: 0, ease: 'none',
+      /* ── SCROLL: fade content gently as section scrolls out ── */
+      gsap.to([logoFade, content, glow], {
+        y: -50,
+        opacity: 0,
+        ease: 'none',
         scrollTrigger: { trigger: section, start: 'top top', end: 'bottom top', scrub: 1.5 },
       });
-      gsap.to('.float-pb', { opacity: 0, y: -30, ease: 'none',
+
+      /* Floating images fade only (no transform conflict with their GSAP float) */
+      gsap.to('.float-pb', {
+        opacity: 0,
+        ease: 'none',
         scrollTrigger: { trigger: section, start: '50% top', end: 'bottom top', scrub: 1.5 },
       });
     }, section);
@@ -123,8 +137,8 @@ const Hero = () => {
           <div className="anim-scan absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#41A3CF]/30 to-transparent" />
         </div>
 
-        {/* Floating powerbanks */}
-        {fbs.map((pb, i) => <div key={i} className="float-pb"><FloatingPB {...pb} /></div>)}
+        {/* Floating powerbanks — class directly on absolute div */}
+        {fbs.map((pb, i) => <FloatingPB key={i} {...pb} className="float-pb" />)}
 
         {/* Central brand glow orb */}
         <div ref={glowRef} className="absolute top-1/2 left-1/2 w-[650px] h-[650px] pointer-events-none"
@@ -145,64 +159,69 @@ const Hero = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#06060A] to-transparent pointer-events-none z-[1]" />
 
         {/* Content */}
-        <div ref={contentRef} className="relative z-10 w-full px-6 lg:px-12 pt-24 pb-16">
+        <div className="relative z-10 w-full px-6 lg:px-12 pt-24 pb-16">
           <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
-            {/* Logo */}
-            <div ref={logoRef} className="relative mb-8 will-change-transform">
-              <div className="absolute inset-0 -m-6 rounded-full"
-                style={{ background: 'radial-gradient(circle, rgba(65,163,207,0.2) 0%, transparent 70%)', filter: 'blur(24px)' }} />
-              <img src={`${base}images/logo.png`} alt="PlugHub"
-                className="relative z-10 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain drop-shadow-2xl" draggable={false} />
+            {/* Logo — outer ref for 3D tilt, inner ref for scroll fade */}
+            <div ref={logoTiltRef} className="relative mb-8 will-change-transform" style={{ perspective: '1000px' }}>
+              <div ref={logoFadeRef} className="relative">
+                <div className="absolute inset-0 -m-6 rounded-full"
+                  style={{ background: 'radial-gradient(circle, rgba(65,163,207,0.2) 0%, transparent 70%)', filter: 'blur(24px)' }} />
+                <img src={`${base}images/logo.png`} alt="PlugHub"
+                  className="relative z-10 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain drop-shadow-2xl" draggable={false} />
+              </div>
             </div>
 
-            {/* Badge */}
-            <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#41A3CF]/25 bg-[#41A3CF]/[0.06] backdrop-blur-sm mb-6">
-              <Zap className="w-3.5 h-3.5 text-[#41A3CF]" />
-              <span className="label">IL PRIMO SHARING A RICARICA RAPIDA</span>
-            </div>
+            {/* Text content */}
+            <div ref={contentRef}>
+              {/* Badge */}
+              <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#41A3CF]/25 bg-[#41A3CF]/[0.06] backdrop-blur-sm mb-6">
+                <Zap className="w-3.5 h-3.5 text-[#41A3CF]" />
+                <span className="label">IL PRIMO SHARING A RICARICA RAPIDA</span>
+              </div>
 
-            {/* Headline */}
-            <h1 className="hero-headline text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
-              <span className="text-[#F4F6FA]">I tuoi clienti</span>
-              <span className="block mt-2 text-brand-gradient">sempre carichi</span>
-            </h1>
+              {/* Headline */}
+              <h1 className="hero-headline text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
+                <span className="text-[#F4F6FA]">I tuoi clienti</span>
+                <span className="block mt-2 text-brand-gradient">sempre carichi</span>
+              </h1>
 
-            {/* Subheadline */}
-            <p className="hero-sub text-base sm:text-lg text-[#8A8F9D] mb-8 max-w-lg leading-relaxed">
-              <span className="text-[#F4F6FA] font-medium">Trasforma clienti con batteria scarica in clienti soddisfatti.</span>
-              <br />
-              <span className="text-[#8A8F9D]">Zero costi, zero gestione.</span>
-            </p>
+              {/* Subheadline */}
+              <p className="hero-sub text-base sm:text-lg text-[#8A8F9D] mb-8 max-w-lg leading-relaxed">
+                <span className="text-[#F4F6FA] font-medium">Trasforma clienti con batteria scarica in clienti soddisfatti.</span>
+                <br />
+                <span className="text-[#8A8F9D]">Zero costi, zero gestione.</span>
+              </p>
 
-            {/* CTAs */}
-            <div className="hero-ctas flex flex-col sm:flex-row gap-3 mb-10">
-              <button onClick={() => scrollToSection('contact')} className="btn-primary">
-                <span className="relative z-10 flex items-center gap-2">
-                  Installa gratis nel tuo locale <ArrowRight className="w-4 h-4" />
-                </span>
-                <span className="shine" />
-              </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="btn-ghost">
-                Scopri come funziona
-              </button>
-            </div>
+              {/* CTAs */}
+              <div className="hero-ctas flex flex-col sm:flex-row gap-3 mb-10">
+                <button onClick={() => scrollToSection('contact')} className="btn-primary">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Installa gratis nel tuo locale <ArrowRight className="w-4 h-4" />
+                  </span>
+                  <span className="shine" />
+                </button>
+                <button onClick={() => scrollToSection('how-it-works')} className="btn-ghost">
+                  Scopri come funziona
+                </button>
+              </div>
 
-            {/* Stats */}
-            <div className="hero-stats flex gap-3 justify-center">
-              {[
-                { icon: Zap, val: '22.5W', label: 'Potenza' },
-                { icon: Battery, val: '8000mAh', label: 'Capacità' },
-              ].map((s, i) => (
-                <div key={i} className="glass glass-hover flex items-center gap-3 px-4 py-2.5 cursor-default">
-                  <div className="w-8 h-8 rounded-lg bg-[#41A3CF]/10 flex items-center justify-center">
-                    <s.icon className="w-4 h-4 text-[#41A3CF]" />
+              {/* Stats */}
+              <div className="hero-stats flex gap-3 justify-center">
+                {[
+                  { icon: Zap, val: '22.5W', label: 'Potenza' },
+                  { icon: Battery, val: '8000mAh', label: 'Capacità' },
+                ].map((s, i) => (
+                  <div key={i} className="glass glass-hover flex items-center gap-3 px-4 py-2.5 cursor-default">
+                    <div className="w-8 h-8 rounded-lg bg-[#41A3CF]/10 flex items-center justify-center">
+                      <s.icon className="w-4 h-4 text-[#41A3CF]" />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-bold text-[#F4F6FA] font-mono">{s.val}</div>
+                      <div className="text-[10px] text-[#5A5F6D]">{s.label}</div>
+                    </div>
                   </div>
-                  <div className="text-left">
-                    <div className="text-sm font-bold text-[#F4F6FA] font-mono">{s.val}</div>
-                    <div className="text-[10px] text-[#5A5F6D]">{s.label}</div>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
