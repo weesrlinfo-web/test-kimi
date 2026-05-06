@@ -18,109 +18,48 @@ const FAQ = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const title = titleRef.current;
-    const items = itemsRef.current;
-
-    if (!section || !title || !items) return;
-
+    const s = sectionRef.current, t = titleRef.current, i = itemsRef.current;
+    if (!s || !t || !i) return;
     const ctx = gsap.context(() => {
-      // Title entrance
-      gsap.fromTo(
-        title.querySelectorAll('.reveal-item'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: 'expo.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
+      gsap.fromTo(t.querySelectorAll('.reveal-item'), { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, stagger: 0.08, ease: 'expo.out',
+          scrollTrigger: { trigger: s, start: 'top 85%', toggleActions: 'play none none reverse' },
         }
       );
-
-      // FAQ items staggered entrance
-      const faqItems = items.querySelectorAll('.faq-item');
-      gsap.fromTo(
-        faqItems,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.06,
-          ease: 'expo.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse',
-          },
+      const items = i.querySelectorAll('.faq-item');
+      gsap.fromTo(items, { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.06, ease: 'expo.out',
+          scrollTrigger: { trigger: s, start: 'top 75%', toggleActions: 'play none none reverse' },
         }
       );
-    }, section);
-
+    }, s);
     return () => ctx.revert();
   }, []);
 
-  const toggleFaq = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      id="faq"
-      className="relative py-24 lg:py-32 bg-[#06060A]"
-    >
-      {/* Background accent */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#41A3CF]/[0.02] to-transparent pointer-events-none" />
-
+    <section ref={sectionRef} id="faq" className="relative py-28 lg:py-36 bg-[#040408]">
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#41A3CF]/[0.015] to-transparent pointer-events-none" />
       <div className="relative w-full px-6 lg:px-12">
         <div className="max-w-2xl mx-auto">
-          {/* Title */}
-          <div ref={titleRef} className="text-center mb-12">
-            <span className="reveal-item label block mb-3">DOMANDE FREQUENTI</span>
-            <h2 className="reveal-item text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F4F6FA] mb-3">
-              FAQ
-            </h2>
-            <p className="reveal-item text-[#8A8F9D] text-base">
-              Risposte rapide alle domande più comuni.
-            </p>
+          <div ref={titleRef} className="text-center mb-14">
+            <span className="reveal-item label block mb-4">DOMANDE FREQUENTI</span>
+            <h2 className="reveal-item text-4xl sm:text-5xl lg:text-6xl font-bold text-[#F0F2F8] mb-4">FAQ</h2>
+            <p className="reveal-item text-base text-[#7A8090]">Risposte rapide alle domande più comuni.</p>
           </div>
 
-          {/* FAQ Items */}
           <div ref={itemsRef} className="space-y-3">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="faq-item"
-              >
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-5 text-left glass glass-hover"
-                >
-                  <span className="font-semibold text-[#F4F6FA] pr-4 text-sm sm:text-base">
-                    {faq.question}
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-[#41A3CF] flex-shrink-0 transition-transform duration-300 ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`}
-                  />
+            {faqs.map((f, i) => (
+              <div key={i} className="faq-item">
+                <button onClick={() => setOpen(open === i ? null : i)}
+                  className="w-full flex items-center justify-between p-6 text-left glass glass-hover">
+                  <span className="font-semibold text-[#F0F2F8] pr-4 text-sm sm:text-base">{f.question}</span>
+                  <ChevronDown className={`w-5 h-5 text-[#41A3CF] flex-shrink-0 transition-transform duration-500 ${open === i ? 'rotate-180' : ''}`} />
                 </button>
-                <div
-                  className={`overflow-hidden transition-all duration-500 ${
-                    openIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <p className="px-5 pb-5 pt-1 text-sm text-[#8A8F9D] leading-relaxed">{faq.answer}</p>
+                <div className={`overflow-hidden transition-all duration-500 ${open === i ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <p className="px-6 pb-5 pt-1 text-sm text-[#7A8090] leading-relaxed">{f.answer}</p>
                 </div>
               </div>
             ))}

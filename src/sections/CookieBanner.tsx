@@ -81,8 +81,8 @@ const CookieBanner = ({ onConsentChange }: CookieBannerProps) => {
               <div className="w-10 h-10 bg-[#41A3CF]/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <Cookie className="w-5 h-5 text-[#41A3CF]" />
               </div>
-              <div className="text-sm text-[#8A8F9D]">
-                <p className="text-[#F4F6FA] font-medium mb-1">Informativa breve:</p>
+              <div className="text-sm text-[#7A8090]">
+                <p className="text-[#F0F2F8] font-medium mb-1">Informativa breve:</p>
                 <p>
                   Questo sito usa strumenti tecnici necessari e Google Maps solo dopo il tuo consenso.
                   Se rifiuti, la lista delle stazioni resta disponibile ma la mappa interattiva non viene caricata.
