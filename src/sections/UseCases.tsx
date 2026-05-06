@@ -7,7 +7,7 @@ import { Beer, Building2, Dumbbell, Calendar, ArrowUpRight } from 'lucide-react'
 gsap.registerPlugin(ScrollTrigger);
 
 const useCases = [
-  { icon: Beer, title: 'Locali', description: 'Un dettaglio che i clienti notano e ricordano. Migliora l'esperienza e genera valore per il locale.', stat: 'Più', statLabel: 'offerta', accent: '#E87B3C' },
+  { icon: Beer, title: 'Locali', description: 'Un dettaglio che i clienti notano e ricordano. Migliora l\'esperienza e genera valore per il locale.', stat: 'Più', statLabel: 'offerta', accent: '#E87B3C' },
   { icon: Building2, title: 'Hotel', description: 'Un servizio aggiuntivo per gli ospiti, disponibile 24/7.', stat: 'Servizio', statLabel: 'internazionale', accent: '#5B8DEF' },
   { icon: Dumbbell, title: 'Palestre & SPA', description: 'Perfetto mentre si fa sport o ci si rilassa, senza interrompere l\'esperienza.', stat: 'TOP', statLabel: 'servizio', accent: '#4ECB71' },
   { icon: Calendar, title: 'Eventi & Congressi', description: 'Installazione temporanea per fiere, concerti e conferenze. Un servizio utile per i partecipanti.', stat: 'Fast', statLabel: 'setup', accent: '#B76CFD' },
